@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet,ModelViewSet
 from rest_framework.response import Response
 from profile_api import serializers
 from rest_framework import status
+from profile_api.models import UserProfile
+
 
 class HelloAPIView(APIView):
     """ Test APIView """
@@ -82,3 +84,9 @@ class HelloViewSet(ViewSet):
 
     def destroy(self,request,pk = None):
         return Response({"HTTP-method": "DELETE"})
+
+
+class UserProfileViewSet(ModelViewSet):
+    serializer_class = serializers.UserProfileSerializer
+    queryset = UserProfile.objects.all()
+            
