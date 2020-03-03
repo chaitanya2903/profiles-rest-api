@@ -7,7 +7,7 @@ from rest_framework import status
 from profile_api.models import UserProfile
 from profile_api.permissions import UpdateOwnProfile
 from rest_framework.authentication import TokenAuthentication
-
+from rest_framework import filters
 
 class HelloAPIView(APIView):
     """ Test APIView """
@@ -93,3 +93,6 @@ class UserProfileViewSet(ModelViewSet):
     queryset = UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name','email',)
+    
